@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
 
             //foreign key
-            $table->integer('comment_id')->nullable();
-            $table->integer('resolved_by')->nullable(); //(FK _ Members table)
+            $table->unsignedBigInteger('comment_id');
+            $table->unsignedBigInteger('resolved_by');
+            $table->foreign('comment_id')->references('id')->on('comments');
+            $table->foreign('resolved_by')->references('id')->on('members');
             //
 
             $table->timestamps();

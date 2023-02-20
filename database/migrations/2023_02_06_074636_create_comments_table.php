@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
 
             //foreign key
-            $table->integer('file_id')->nullable();
-            $table->integer('member_id')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('file_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('member_id')->references('id')->on('members');
+            $table->foreign('file_id')->references('id')->on('files');
             //
 
             $table->string('comment_text');

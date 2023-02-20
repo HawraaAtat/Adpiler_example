@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
 
             //foreign key
-            $table->integer('client_id')->nullable();
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
             //
 
             $table->string('campaign_name');

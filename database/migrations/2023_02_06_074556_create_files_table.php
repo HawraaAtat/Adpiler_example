@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
 
             //foreign key
-            $table->integer('campaign_id')->nullable();
-            $table->integer('client_id')->nullable();
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('campaign_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('campaign_id')->references('id')->on('campaigns');
             //
 
             $table->string('file_name');

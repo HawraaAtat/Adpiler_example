@@ -18,10 +18,10 @@ return new class extends Migration
 
             //foreign key
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('team_id');
             $table->unsignedBigInteger('file_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('member_id')->references('id')->on('members');
+            $table->foreign('team_id')->references('id')->on('teams');
             $table->foreign('file_id')->references('id')->on('files');
             //
 

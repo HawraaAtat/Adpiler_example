@@ -20,9 +20,9 @@ class Comment extends Model
         return $this->belongsTo(File::class);
     }
 
-    public function member()
+    public function team()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Team::class);
     }
 
     public function user() {
@@ -34,5 +34,5 @@ class Comment extends Model
         return $this->hasOne(Resolved::class);
     }
 
-    
+
 }

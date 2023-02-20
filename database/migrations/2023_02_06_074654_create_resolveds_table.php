@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('comment_id');
             $table->unsignedBigInteger('resolved_by');
             $table->foreign('comment_id')->references('id')->on('comments');
-            $table->foreign('resolved_by')->references('id')->on('members');
+            $table->foreign('resolved_by')->references('id')->on('users');
             //
 
             $table->timestamps();

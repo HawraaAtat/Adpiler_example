@@ -21,7 +21,7 @@ class Resolved extends Model
 
     public function resolvedBy()
     {
-        return $this->belongsTo(Member::class, 'resolved_by');
+        return $this->belongsTo(User::class, 'resolved_by');
     }
 
 }

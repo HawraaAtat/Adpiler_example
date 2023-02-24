@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('resolveds', function (Blueprint $table) {
+
+         Schema::create('resolveds', function (Blueprint $table) {
             $table->id();
 
-            //foreign key
+            // foreign key
             $table->unsignedBigInteger('comment_id');
             $table->unsignedBigInteger('resolved_by');
             $table->foreign('comment_id')->references('id')->on('comments');
-            $table->foreign('resolved_by')->references('id')->on('users');
+            $table->foreign('resolved_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             //
 
             $table->timestamps();

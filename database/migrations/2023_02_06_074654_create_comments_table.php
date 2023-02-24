@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+       Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
             //foreign key
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('team_id');
             $table->unsignedBigInteger('file_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('team_id')->references('id')->on('teams');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade')->onUpdate('cascade');
             //
 
             $table->string('comment_text');

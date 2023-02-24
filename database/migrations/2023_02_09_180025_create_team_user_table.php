@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('team_user', function (Blueprint $table) {
             //fk
-            $table->unsignedBigInteger('team_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('team_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             //
 
             $table->string('role')->nullable();

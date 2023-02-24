@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
 
             //foreign key
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('team_id');
-            $table->unsignedBigInteger('file_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
+            $table->unsignedBigInteger('file_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade')->onUpdate('cascade');

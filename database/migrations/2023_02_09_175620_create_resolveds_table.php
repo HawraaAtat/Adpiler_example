@@ -18,8 +18,8 @@ return new class extends Migration
             $table->id();
 
             // foreign key
-            $table->unsignedBigInteger('comment_id');
-            $table->unsignedBigInteger('resolved_by');
+            $table->unsignedBigInteger('comment_id')->nullable();
+            $table->unsignedBigInteger('resolved_by')->nullable();
             $table->foreign('comment_id')->references('id')->on('comments');
             $table->foreign('resolved_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             //

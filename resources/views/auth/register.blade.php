@@ -53,7 +53,9 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Register</button>
-                        <p class="message">Already registered? <a href="{{url('login')}}">LogIn</a></p>
+{{--                        <p class="message">Already registered? <a href="{{url('login')}}">LogIn</a></p>--}}
+                        <p class="message">Already registered? <a href="{{route('login.index', $token)}}">LogIn</a></p>
+
                     </form>
                     <br>
                 </div>

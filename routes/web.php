@@ -31,8 +31,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login/{token?}', [AuthController::class, 'index'])->name('login.index');
+Route::post('/login', [AuthController::class, 'store'])->name('login.store');
 
-Route::resource('login', AuthController::class);
 
 Route::resource('register', RegisterController::class);
 Route::post('store-company', [RegisterController::class, 'storeCompany'])->name('store.company');

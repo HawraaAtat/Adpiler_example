@@ -45,12 +45,14 @@
                                     @enderror
                                 </div>
 
+                                @if($token)
+                                <input type="hidden" name="tokenn" value="{{ $token }}">
+                                @endif
+
                                 <button type="submit" class="btn btn-primary">Login</button>
                                 <p class="message">Not registered? <a href="{{url('register')}}">Create an account</a></p>
 
                             </div>
-                        </div>
-                    </div>
 
             </form>
             <br>

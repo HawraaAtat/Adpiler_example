@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\TeamInvitationMail;
 use App\Models\Team;
 use App\Models\TeamInvitation;
 use App\Models\User;
@@ -70,7 +69,8 @@ class TeamMembersController extends Controller
         $invitation->save();
 
         // Send the invitation email
-        $url = route('team.invitation', $token);
+//        $url = route('team.invitation', $token);
+        $url = route('login.index', $token);
         Mail::raw("You've been invited to join the team! Click this link to accept: {$url}", function($message) use ($request) {
             $message->to($request->input('email'))
                 ->subject('Invitation to join the team');

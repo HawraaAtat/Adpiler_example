@@ -61,8 +61,17 @@ class ClientController extends Controller
             'users.*' => 'exists:users,id'
         ]);
 
+
+        $loggedInUser = Auth::user();
+
+        $user_id= $loggedInUser->getAuthIdentifier();
+        $user= User::find($user_id);
+        $company_id= $user->company->id;
+
         $client = new Client;
         $client->client_name = $validatedData['client_name'];
+        $client->user_id = $user_id;
+        $client->company_id = $company_id;
         $client->save();
 
         $client->users()->attach($validatedData['users']);

@@ -7,7 +7,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SocialAdsController;
 use App\Http\Controllers\TeamMembersController;
 use App\Http\Controllers\UploadFilesController;
+use App\Http\Controllers\TeamInvitationsController;
 use App\Models\Client;
+use App\Models\TeamInvitation;
 use App\Models\Comment;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
@@ -95,8 +97,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('social-ads', SocialAdsController::class);
 
     Route::resource('social-ads', SocialAdsController::class);
+
     Route::resource('team-members', TeamMembersController::class);
 
+
+    Route::get('/team/invitation/{token}', function ($token) {
+        $invitation = TeamInvitation::where('token', $token)->first();
+        return view('emails.team_invitation', compact('invitation'));
+    })->name('team.invitation');
+
+
+    Route::post('/team/accept-invitation/{token}', [TeamInvitationsController::class, 'acceptInvitation'])->name('team.invitation.accept');
 
 
 

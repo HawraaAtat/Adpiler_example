@@ -17,7 +17,7 @@
             </button>
             <!-- Brand -->
             <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="#">
-                <img src="{{ asset('img/logo.png') }}" alt="logo"> <strong>Adp</strong>
+                <img src="{{ asset('img/logo.png') }}" alt="logo">
             </a>
             <!-- User menu (mobile) -->
             <div class="navbar-user d-lg-none">

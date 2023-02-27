@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TeamInvitationMail;
 use App\Models\Team;
+use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
 
 class TeamMembersController extends Controller
 {
@@ -30,8 +35,9 @@ class TeamMembersController extends Controller
      */
     public function create()
     {
-        $teams =Team::all();
-        return view('team_members.create', compact('teams'));
+//        $teams =Team::all();
+        $userTeams = auth()->user()->teams;
+        return view('team_members.create', compact('userTeams'));
     }
 
     /**
@@ -42,32 +48,38 @@ class TeamMembersController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name'=>'required',
-            'email' => 'required|email|unique:users',
+        // Validate the form input
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'role' => 'required|in:user,admin,manager',
+            'team_id' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-            ]);
-        }
+        // Generate a unique token for the invitation
+        $token = Str::random(32);
 
-        $team = auth()->user()->teams()->first();
-        if ($team) {
-            $team->users()->attach($user->id);
-        } else {
-            $team = Team::create([
-                'name' => auth()->user()->email . ' Team',
-            ]);
 
-            $team->users()->attach(auth()->user()->id);
-            $team->users()->attach($user->id);
-        }
+        // Save the invitation details to the database
+        $invitation = new TeamInvitation();
+        $invitation->name = $request->input('name');
+        $invitation->email = $request->input('email');
+        $invitation->role = $request->input('role');
+        $invitation->team_id = $request->input('team_id');
+        $invitation->token = $token;
+        $invitation->save();
 
-        return redirect()->route('team-members.index')->with('success', 'Team Member added successfully.');
+        // Send the invitation email
+        $url = route('team.invitation', $token);
+        Mail::raw("You've been invited to join the team! Click this link to accept: {$url}", function($message) use ($request) {
+            $message->to($request->input('email'))
+                ->subject('Invitation to join the team');
+        });
+
+
+
+        return redirect()->back()->with('success', 'Invitation sent!');
+
 
     }
 
@@ -115,4 +127,6 @@ class TeamMembersController extends Controller
     {
         //
     }
+
+
 }

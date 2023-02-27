@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    //model = TeamMember
     /**
      * Run the migrations.
      *

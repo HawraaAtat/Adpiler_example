@@ -43,73 +43,56 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('team-members.store') }}" method="post">
-                            @csrf
 
-                            <div class="form-group">
-                              <label for="name">Name</label>
-                              <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
-                              @error('name')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                            </div>
+                            <form method="POST" action="{{ route('team-members.store') }}">
+                                @csrf
 
-                            <div class="form-group">
-                              <label for="email">Email</label>
-                              <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
-                              @error('email')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                            </div>
+                                <div class="form-group">
+                                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Name">
+                                    @error('name')
+                                    <div style="color: #f40142">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                              <label for="password">Password</label>
-                              <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
-                              @error('password')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                            </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                                    @error('email')
+                                    <div style="color: #f40142"> {{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                              <label for="role_id">Role</label>
-                              <select name="role_id" id="role_id" class="form-control @error('role_id') is-invalid @enderror">
-                                <option value="">Select role</option>
+                                <div class="form-group">
+                                    <select id="role" class="form-control" name="role">
+                                        <option value="">Select Role</option>
+                                        <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                        <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
+                                    </select>
+                                    @error('role')
+                                    <div style="color: #f40142">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                  <option value="Admin">Admin</option>
-                                  <option value="Manager">Manager </option>
-                                  <option value="User">User</option>
+                                <div class="form-group">
+                                    <select id="team_id" class="form-control" name="team_id">
+                                        <option value="">Select Team</option>
+                                        @foreach($userTeams as $team)
+                                            <option value="{{ $team->id }}" {{ old('team_id') == $team->id ? 'selected' : '' }}>
+                                                {{ $team->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('team_id')
+                                    <div style="color: #f40142">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                              </select>
-                              @error('role_id')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                            </div>
 
 
-                            <div class="form-group">
-                              <label for="team_id">Team</label>
-                              <select name="team_id" id="team_id" class="form-control @error('team_id') is-invalid @enderror">
-                                <option value="">Select Team</option>
-                                @foreach($teams as $team)
-                                  <option value="{{ $team->id }}" {{ old('team_id') == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
-                                @endforeach
-                              </select>
-                              @error('team_id')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                            </div>
+                                <button class="btn btn-primary" type="submit">Send Invitation</button>
+                            </form>
 
-                            <div class="form-group">
-                                <label for="name">Or Create A New Team</label>
-                                <input type="text" name="team_name" id="team_name" class="form-control @error('team_name') is-invalid @enderror" value="{{ old('team_name') }}">
-                                @error('team_name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                              </div>
-
-                            <button type="submit" class="btn btn-primary">Save</button>
-                          </form>
-
+                            <br>
                     </div>
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\File;
 use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,22 +39,6 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $validatedData = $request->validate([
-        //     'client_name' => 'required|string|max:255',
-        //     'member_id' => 'required',
-        // ]);
-        // return "hi";
-        // $client= Client::create([ 'client_name' => $validatedData['client_name'] ]);
-        // return $client;
-        // $member_id = $validatedData['member_id'];
-
-        // $member= Member::find($member_id);
-
-        // $client->members()->associate($member);
-        // $client->save();
-
-        // return redirect()->route('clients')->with('success', 'Client created successfully');
 
         $validatedData = $request->validate([
             'client_name' => 'required|string|max:255',
@@ -125,5 +110,15 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showFiles($token)
+    {
+        $client = Client::where('token', $token)->firstOrFail();
+//        $files = $client->files;
+        $client_id = $client->id;
+        $files = File::where('client_id', $client_id)->get();
+
+        return view('clients.files', compact('client', 'files'));
     }
 }

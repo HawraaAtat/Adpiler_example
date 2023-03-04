@@ -72,7 +72,7 @@ Route::get('/create_client', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        $clients = Client::all();
+        $clients = $user->clients;
         return view('home.dashboard', compact('clients', 'user'));
     });
     Route::get('/comments', function () {
@@ -110,7 +110,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/team/accept-invitation/{token}', [TeamInvitationsController::class, 'acceptInvitation'])->name('team.invitation.accept');
 
+    Route::get('/clients/{token}/files', [ClientController::class, 'showFiles'])->name('client.files');
 
+    Route::get('/test', function () {
+        return "test";
+    });
 
 
 });

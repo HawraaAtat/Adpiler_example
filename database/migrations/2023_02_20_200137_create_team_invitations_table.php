@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('role');
             $table->string('token')->unique();
-//            $table->unsignedBigInteger('team_id')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->timestamps();
 
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');

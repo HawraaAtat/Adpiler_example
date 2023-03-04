@@ -48,13 +48,13 @@
                             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
 
                             @error('password_confirmation')
-                                <label style="color: #f40142">{{$message}}</label>
+{{--                                <label style="color: #f40142">{{$message}}</label>--}}
                             @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Register</button>
-{{--                        <p class="message">Already registered? <a href="{{url('login')}}">LogIn</a></p>--}}
-                        <p class="message">Already registered? <a href="{{route('login.index', $token)}}">LogIn</a></p>
+                        <p class="message">Already registered? <a href="{{url('login')}}">LogIn</a></p>
+{{--                        <p class="message">Already registered? <a href="{{route('login.index', $token)}}">LogIn</a></p>--}}
 
                     </form>
                     <br>

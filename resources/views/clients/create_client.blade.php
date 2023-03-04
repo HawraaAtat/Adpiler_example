@@ -30,7 +30,6 @@
                         <div class="form-group">
                             <label for="users">Users</label>
                             <select name="users[]" id="users" class="form-control" multiple required>
-
                                     <ul>
                                         @foreach ($uniqueUsers as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>

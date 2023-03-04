@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
 
 class Client extends Model
 {
@@ -36,12 +38,22 @@ class Client extends Model
     }
 
     public function members() {
-        return $this->hasMany(Member::class, 'client_id', 'client_id');
+        return $this->hasMany(TeamMember::class, 'client_id', 'client_id');
     }
 
     public function teams()
     {
         return $this->belongsToMany(Team::class);
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($client) {
+            $client->token = Str::random(32); // Generate a 32-character random token for the client
+        });
     }
 
 }

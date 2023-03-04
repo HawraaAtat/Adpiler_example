@@ -26,6 +26,8 @@ return new class extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             //
 
+            $table->string('token')->unique()->nullable();
+
             $table->string('client_name');
             $table->timestamps();
 

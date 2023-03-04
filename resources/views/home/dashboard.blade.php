@@ -46,6 +46,7 @@
                                     <th scope="col">Campaigns</th>
                                     <th scope="col">Files</th>
                                     <th scope="col">Members</th>
+                                    <th scope="col">Link</th>
                                     <th scope="col">Details</th>
                                 </tr>
                             </thead>
@@ -55,13 +56,13 @@
                                 <tr>
                                     <td>{{ $client->client_name }}</td>
                                     <td>{{ $client->campaigns->count()}}</td>
-                                    <td>{{ $client->files->count() }}</td>
-                                    {{-- <td>{{ $client->members->where('user_id', $user->id)->count()}}</td> --}}
-
+                                    <td>{{ \App\Models\File::where('client_id', $client->id)->count()}}</td>
                                     <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
+                                        @foreach ($client->users as $user)
+                                            <li>{{ $user->name }}</li>
+                                        @endforeach
+                                    <td>
+                                        <a href="{{ route('client.files', $client->token) }}" class="btn btn-primary">View Files</a>
                                     </td>
 
                                     <td>

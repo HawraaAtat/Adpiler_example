@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Client;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,14 @@ class UploadFilesController extends Controller
      */
     public function index()
     {
-        $files = File::all();
+
+
+        $loggedInUser = Auth::user();
+
+        $user_id= $loggedInUser->getAuthIdentifier();
+        $user= User::find($user_id);
+        $files= $user->files;
+//        $files = File::all();
         return view('upload_files.index', compact('files'));
     }
 
@@ -38,7 +46,7 @@ class UploadFilesController extends Controller
         {
 
             $loggedInUser = Auth::user();
-
+            $user_id= $loggedInUser->getAuthIdentifier();
 
             // Validate the form data
             $request->validate([
@@ -80,6 +88,7 @@ class UploadFilesController extends Controller
 
             // Save the file information to the database
             File::create([
+                'user_id'=>$user_id,
                 'client_id' => $client->id,
                 'campaign_id' => $campaign->id,
                 'file_name' => $file_name,

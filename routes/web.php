@@ -51,25 +51,27 @@ Route::get('/create_company', function () {
     return view('auth.create_company');
 });
 
-Route::get('/create_client', function () {
-    $user = Auth::user();
-    // $users = $user->company->users;
-    $teamIds = $user->teams->pluck('pivot.team_id');
-    $teams = Team::whereIn('id', $teamIds)->with('users')->get();
-
-    $users = collect();
-
-    foreach ($teams as $team) {
-        $users = $users->merge($team->users);
-    }
-
-    $uniqueUsers = $users->unique('id');
-
-    return view('clients.create_client', compact('uniqueUsers'));
-});
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/create_client', function () {
+        $user = Auth::user();
+        // $users = $user->company->users;
+        $teamIds = $user->teams->pluck('pivot.team_id');
+        $teams = Team::whereIn('id', $teamIds)->with('users')->get();
+
+        $users = collect();
+
+        foreach ($teams as $team) {
+            $users = $users->merge($team->users);
+        }
+
+        $uniqueUsers = $users->unique('id');
+
+        return view('clients.create_client', compact('uniqueUsers'));
+    });
+
     Route::get('/dashboard', function () {
         $user = Auth::user();
         $clients = $user->clients;

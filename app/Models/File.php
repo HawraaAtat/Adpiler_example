@@ -11,6 +11,7 @@ class File extends Model
 
     protected $fillable = [
         'campaign_id',
+        'user_id',
         'client_id',
         'file_name',
         'file_type',

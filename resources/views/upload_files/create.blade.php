@@ -59,30 +59,30 @@
                         <h5 class="mb-0">Upload File</h5>
                     </div>
 
-                    <div class="container">
-                        <ul class="progress-tracker">
-                            <li class="complete">
-                                <div class="step">1</div>
-                                <div class="label">Select client</div>
-                            </li>
-                            <li class="complete">
-                                <div class="step">2</div>
-                                <div class="label">Upload files</div>
-                            </li>
-                            <li class="active">
-                                <div class="step">3</div>
-                                <div class="label">Confirm files</label>
-                            </li>
-                            <li>
-                                <div class="step">4</div>
-                                <div class="label">Page setup</div>
-                            </li>
-                            <li>
-                                <div class="step">5</div>
-                                <div class="label">Settings</div>
-                            </li>
-                        </ul>
-                    </div>
+{{--                    <div class="container">--}}
+{{--                        <ul class="progress-tracker">--}}
+{{--                            <li class="complete">--}}
+{{--                                <div class="step">1</div>--}}
+{{--                                <div class="label">Select client</div>--}}
+{{--                            </li>--}}
+{{--                            <li class="complete">--}}
+{{--                                <div class="step">2</div>--}}
+{{--                                <div class="label">Upload files</div>--}}
+{{--                            </li>--}}
+{{--                            <li class="active">--}}
+{{--                                <div class="step">3</div>--}}
+{{--                                <div class="label">Confirm files</div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="step">4</div>--}}
+{{--                                <div class="label">Page setup</div>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <div class="step">5</div>--}}
+{{--                                <div class="label">Settings</div>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
                     <br>
 
                     <div class="container">
